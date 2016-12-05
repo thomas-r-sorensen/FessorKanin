@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/VendeSpilGame.unity
+- path: Assets/Scenes/AlphabetGame.unity
   isLoaded: 1
   isActive: 1
