@@ -73,8 +73,10 @@
     <Compile Include="Assets\Scripts\AlphabetGameManger.cs" />
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Letter.cs" />
     <Compile Include="Assets\Scripts\MainMenuBtnManager.cs" />
     <Compile Include="Assets\Scripts\MenuBehavior.cs" />
+    <Compile Include="Assets\Scripts\Option.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
