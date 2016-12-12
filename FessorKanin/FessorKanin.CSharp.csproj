@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Letter.cs" />
     <Compile Include="Assets\Scripts\MainMenuBtnManager.cs" />
+    <Compile Include="Assets\Scripts\Map.cs" />
     <Compile Include="Assets\Scripts\MenuBehavior.cs" />
     <Compile Include="Assets\Scripts\Option.cs" />
   </ItemGroup>
