@@ -9,10 +9,11 @@ public class GameManager : MonoBehaviour
     public Sprite[] cardBack;
     public Sprite[] icons;
     public GameObject[] cards;
-    public Text matchText;
+    
 
     private bool _init = false;
-    private int _matches = 8;
+    
+    private int matchChecker = 0;
 
     private bool _BlockInput = false;
 
@@ -22,29 +23,16 @@ public class GameManager : MonoBehaviour
         set { _BlockInput = value; }
     }
 
-    // Update is called once per frame
-    void Update ()
-    {
-        if (!_init)
-        {
-            initializeCards();
-            matchText.text = "Number of Matches: " + _matches;
-        }
-            
-        if (Input.GetMouseButtonUp(0))
-            checkCards();
-	}
-
     void initializeCards()
     {
-        for(int id = 0; id < 2; id++)
+        for (int id = 0; id < 2; id++)
         {
             for (int i = 1; i < 9; i++)
             {
                 bool test = false;
                 int choice = 0;
 
-                while(!test)
+                while (!test)
                 {
                     choice = Random.Range(0, cards.Length);
                     test = !(cards[choice].GetComponent<Card>().initialized);
@@ -55,17 +43,48 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        foreach(GameObject c in cards)
+        foreach (GameObject c in cards)
         {
             c.GetComponent<Card>().setupGraphics();
         }
 
-        if(!_init)
+        if (!_init)
         {
             _init = true;
         }
 
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!_init)
+        {
+            initializeCards();
+            
+        }
+
+        if (Input.GetMouseButtonUp(0))
+            checkCards();
+
+        foreach (GameObject card in cards)
+        {
+            if (card.GetComponent<Card>().state != 2)
+            {
+                matchChecker++;
+            }
+        }
+
+        if(matchChecker != 0)
+        {
+            matchChecker = 0;
+        }
+        else
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+    
 
     public Sprite getCardBack(int i)
     {
@@ -104,24 +123,18 @@ public class GameManager : MonoBehaviour
     {
         BlockInput = true;
         bool StopCheck = false;
-        int x = 0;
+        int state = 0;
 
-        if (!StopCheck && cards[c[0]].GetComponent<Card>().cardValue == cards[c[1]].GetComponent<Card>().cardValue)
+        if (StopCheck == false && cards[c[0]].GetComponent<Card>().cardValue == cards[c[1]].GetComponent<Card>().cardValue)
         {
             StopCheck = true;
 
-            x = 2;
-            _matches--;
-            matchText.text = "Number of Matches: " + _matches;
-            if(_matches == 0)
-            {
-                SceneManager.LoadScene("Menu");
-            }
+            state = 2;
         }
 
         for (int i = 0; i < c.Count; i++)
         {
-            cards[c[i]].GetComponent<Card>().state = x;
+            cards[c[i]].GetComponent<Card>().state = state;
             cards[c[i]].GetComponent<Card>().falseCheck();
         }
     }
