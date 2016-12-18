@@ -69,7 +69,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\MainMenu\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\AlphabetGameManger.cs" />
     <Compile Include="Assets\Scripts\BBoard.cs" />
     <Compile Include="Assets\Scripts\Button.cs" />
