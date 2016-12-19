@@ -9,10 +9,12 @@ public class BBoard : MonoBehaviour {
 
     private AudioSource source;
     private float vol = 1;
+    private float initPos;
 
     void Start()
     {
         source = GetComponent<AudioSource>();
+        initPos = transform.position.y;
     }
     
     
@@ -21,7 +23,7 @@ public class BBoard : MonoBehaviour {
 	void Update () {
 	    if(_activated)
         {
-            if(transform.position.y >= 550)
+            if(transform.position.y >= initPos - 1050)
             {
                 transform.position -= new Vector3(0.0f, 12.0f, 0.0f);
                 if(!source.isPlaying)
@@ -32,7 +34,7 @@ public class BBoard : MonoBehaviour {
         }
         else if(!_activated)
         {
-            if (transform.position.y <= 1700)
+            if (transform.position.y < initPos)
             {
                 transform.position += new Vector3(0.0f, 12.0f, 0.0f);
                 if (!source.isPlaying)

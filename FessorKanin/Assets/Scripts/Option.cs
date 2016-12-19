@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class Option : MonoBehaviour {
 
+    public AudioClip success;
+    public AudioClip failure;
+
     [SerializeField]
     private Sprite _thing;
     
@@ -13,13 +16,14 @@ public class Option : MonoBehaviour {
     private GameObject _manager;
     private GameObject _letter;
     private int lettervalue;
+    private AudioSource source;
 
     // Use this for initialization
     void Start()
     {
         _manager = GameObject.FindGameObjectWithTag("Manager");
         _letter = GameObject.FindGameObjectWithTag("Letter");
-        
+        source = GetComponent<AudioSource>();
         
     }
 
@@ -40,6 +44,11 @@ public class Option : MonoBehaviour {
         if(_value == lettervalue)
         {
             _manager.GetComponent<AlphabetGameManger>().refreshPlayingField();
+            source.PlayOneShot(success, 1);
+        }
+        else
+        {
+            source.PlayOneShot(failure, 1);
         }
     }
 

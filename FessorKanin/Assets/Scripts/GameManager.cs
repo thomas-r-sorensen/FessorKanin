@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Sprite[] cardBack;
     public Sprite[] icons;
     public GameObject[] cards;
+    public AudioClip success;
     
 
     private bool _init = false;
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     private int matchChecker = 0;
 
     private bool _BlockInput = false;
+
+    private AudioSource source;
 
     public bool BlockInput
     {
@@ -53,6 +56,11 @@ public class GameManager : MonoBehaviour
             _init = true;
         }
 
+    }
+
+    void Start()
+    {
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -128,6 +136,9 @@ public class GameManager : MonoBehaviour
         if (StopCheck == false && cards[c[0]].GetComponent<Card>().cardValue == cards[c[1]].GetComponent<Card>().cardValue)
         {
             StopCheck = true;
+
+            source.PlayOneShot(success, 1);
+           
 
             state = 2;
         }
