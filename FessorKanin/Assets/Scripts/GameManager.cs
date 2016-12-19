@@ -9,16 +9,14 @@ public class GameManager : MonoBehaviour
     public Sprite[] cardBack;
     public Sprite[] icons;
     public GameObject[] cards;
-    public AudioClip success;
+    public GameObject AudioManager;
+    
     
 
     private bool _init = false;
-    
     private int matchChecker = 0;
-
     private bool _BlockInput = false;
-
-    private AudioSource source;
+    
 
     public bool BlockInput
     {
@@ -58,10 +56,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void Start()
-    {
-        source = GetComponent<AudioSource>();
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -73,7 +68,10 @@ public class GameManager : MonoBehaviour
         }
 
         if (Input.GetMouseButtonUp(0))
+        {
             checkCards();
+        }
+            
 
         foreach (GameObject card in cards)
         {
@@ -137,10 +135,14 @@ public class GameManager : MonoBehaviour
         {
             StopCheck = true;
 
-            source.PlayOneShot(success, 1);
-           
+
+            AudioManager.GetComponent<AudioManager>().playSuccess();
 
             state = 2;
+        }
+        else
+        {
+            AudioManager.GetComponent<AudioManager>().playFailure();
         }
 
         for (int i = 0; i < c.Count; i++)
